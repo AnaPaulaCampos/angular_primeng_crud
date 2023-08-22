@@ -7,6 +7,7 @@ import { Product } from './product';
 })
 export class CrudlivrosService {
 
+
   status: string[] = ['OUTOFSTOCK', 'INSTOCK', 'LOWSTOCK'];
 
     productNames: string[] = [
@@ -46,9 +47,31 @@ export class CrudlivrosService {
 
     constructor(private http: HttpClient) { }
 
+
+
+
     getTodosProdutos(){
       return this.http.get<Product[]>(this.api_url);
     }
+
+    // salvarProduto(person:Product) {
+    //   const headers = { 'content-type': 'application/json'}
+    //   const body=JSON.stringify(person);
+    //   console.log(body)
+    //   return this.http.post(this.api_url + 'people', body,{'headers':headers})
+    // }
+
+    salvarProduto(person:Product): void {
+      // console.log(this.formCadastroAluno.value);
+      this.http.post(this.api_url, person).subscribe(
+        data =>{
+          console.log('salvo no banco');
+        }, error => {
+          console.log({ error })
+          }
+      )
+    }
+
 
     getProductsSmall() {
         return this.http.get<any>('assets/products-small.json')
