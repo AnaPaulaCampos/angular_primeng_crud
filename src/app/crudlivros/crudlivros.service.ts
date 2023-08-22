@@ -52,9 +52,9 @@ export class CrudlivrosService {
     }
 
     getProducts() {
-        return this.http.get<any>('assets/products.json')
+        return this.http.get<any>('http://localhost:3000/produtos')
         .toPromise()
-        .then(res => <Product[]>res.data)
+        .then(res => <Product[]>res.produtos)
         .then(data => { return data; });
     }
 
