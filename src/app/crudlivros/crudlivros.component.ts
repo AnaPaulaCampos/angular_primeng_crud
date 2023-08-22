@@ -33,7 +33,17 @@ export class CrudlivrosComponent {
   constructor(private productService: CrudlivrosService, private messageService: MessageService, private confirmationService: ConfirmationService) { }
 
   ngOnInit() {
-      this.productService.getProducts().then(data => this.products = data);
+      this.getTodosProdutos();
+  }
+
+  getTodosProdutos() {
+    this.productService.getTodosProdutos().subscribe(
+      resultado => {
+
+        console.log(resultado)
+      this.products = resultado;
+    }
+    );
   }
 
   openNew() {

@@ -42,7 +42,13 @@ export class CrudlivrosService {
         "Yoga Set",
     ];
 
+  private readonly api_url = 'http://localhost:3000/produtos';
+
     constructor(private http: HttpClient) { }
+
+    getTodosProdutos(){
+      return this.http.get<Product[]>(this.api_url);
+    }
 
     getProductsSmall() {
         return this.http.get<any>('assets/products-small.json')
@@ -52,10 +58,14 @@ export class CrudlivrosService {
     }
 
     getProducts() {
-        return this.http.get<any>('http://localhost:3000/produtos')
+        return this.http.get<any>(this.api_url)
         .toPromise()
         .then(res => <Product[]>res.produtos)
-        .then(data => { return data; });
+        .then(data => {
+
+          console.log(data);
+          return data; });
+
     }
 
     getProductsWithOrdersSmall() {
