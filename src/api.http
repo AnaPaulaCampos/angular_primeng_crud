@@ -13,3 +13,6 @@ GET http://localhost:3000/produtos/
 
 ####
 GET http://localhost:3000/produtos/1000
+
+####
+DELETE  http://localhost:3000/produtos/1001

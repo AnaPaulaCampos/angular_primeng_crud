@@ -40,8 +40,8 @@ export class CrudlivrosComponent {
   }
 
   getTodosProdutos() {
-    this.productService.getTodosProdutos().subscribe((resultado) => {
-      this.products = resultado;
+    this.productService.getTodosProdutos().subscribe((data) => {
+      this.products = data
     });
   }
 
@@ -78,12 +78,14 @@ export class CrudlivrosComponent {
 
   deleteProduct(product: Product) {
     this.confirmationService.confirm({
-      message: 'Are you sure you want to delete ' + product.name + '?',
-      header: 'Confirm',
+      message: 'confirma exclusão do produto: ' + product.name + '?',
+      header: 'Confirmar Exclusão',
       icon: 'pi pi-exclamation-triangle',
       accept: () => {
+        this.productService.deletar(product.id);
         this.products = this.products.filter((val) => val.id !== product.id);
         this.product = {};
+
         this.messageService.add({
           severity: 'success',
           summary: 'Successful',
