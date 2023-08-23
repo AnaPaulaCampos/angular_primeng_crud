@@ -25,6 +25,8 @@ export class CrudlivrosComponent {
 
   product: Product;
 
+  produtoSalvaComSucesso: Product;
+
   selectedProducts: Product[];
 
   submitted: boolean;
@@ -73,6 +75,9 @@ export class CrudlivrosComponent {
 
   editProduct(product: Product) {
     this.product = { ...product };
+
+    this.productService.editarProduto(product);
+
     this.productDialog = true;
   }
 
@@ -104,9 +109,12 @@ export class CrudlivrosComponent {
   saveProduct() {
     this.submitted = true;
 
-    let a = this.productService.salvarProduto(this.product);
+    this.productService.salvarProduto(this.product).subscribe((data) => {
+      console.log(data)
+      this.produtoSalvaComSucesso = data
+    });
 
-    console.log(a)
+    console.log(this.produtoSalvaComSucesso)
 
     // if (this.product.name.trim()) {
     //     if (this.product.id) {

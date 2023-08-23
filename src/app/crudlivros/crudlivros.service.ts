@@ -57,12 +57,15 @@ export class CrudlivrosService {
   }
 
   salvarProduto(produto: Product) {
-    this.http.post(this.api_url, produto).subscribe((data) => {});
+   return this.http.post(this.api_url, produto);
   }
 
   deletar(idProduto: String) {
-    console.log(idProduto);
     this.http.delete(this.api_url + '/' + idProduto).subscribe((data) => {});
+  }
+
+  editarProduto(produto: Product){
+    this.http.delete(this.api_url + '/' + produto.id).subscribe((data) => {});
   }
 
   httpOptions = {
